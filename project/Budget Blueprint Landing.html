@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Budget Blueprint — Landing Wireframes</title>
+<meta name="viewport" content="width=1400" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Special+Elite&family=Architects+Daughter&family=Kalam:wght@400;700&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; }
+  body { font-family: 'Patrick Hand', 'Comic Sans MS', cursive; color: #1a1a1a; }
+  /* ------- Wireframe primitives ------- */
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f3eb;
+    --paper-2: #efe9dc;
+    --rule: #1a1a1a;
+    --accent: #b8412c; /* clay/oxblood */
+    --muted: #8a8275;
+    --grid: rgba(26,26,26,.07);
+  }
+  .wf { background: var(--paper); color: var(--ink); position: relative; overflow: hidden;
+        font-family: 'Patrick Hand', cursive; }
+  .wf * { box-sizing: border-box; }
+  .wf .hand { font-family: 'Caveat', cursive; font-weight: 700; }
+  .wf .type { font-family: 'Special Elite', 'Courier New', monospace; }
+  .wf .arch { font-family: 'Architects Daughter', cursive; }
+  .wf .kalam { font-family: 'Kalam', cursive; }
+
+  /* Hand-drawn box: wobbly border via SVG filter feel — use double border + slight rotation on accent */
+  .box { border: 1.5px solid var(--ink); border-radius: 6px; background: transparent; }
+  .box.fill { background: var(--paper-2); }
+  .box.ink { background: var(--ink); color: var(--paper); }
+  .box.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .dash { border: 1.5px dashed var(--ink); border-radius: 6px; }
+  .ph { /* image placeholder */
+    background:
+      repeating-linear-gradient(135deg, rgba(26,26,26,.08) 0 6px, transparent 6px 14px),
+      var(--paper-2);
+    border: 1.5px solid var(--ink); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Special Elite', monospace; font-size: 11px; color: rgba(26,26,26,.6);
+    text-transform: uppercase; letter-spacing: .12em;
+  }
+  .scribble {
+    height: 10px; background: transparent;
+    background-image: linear-gradient(var(--ink), var(--ink));
+    background-size: 100% 1.5px; background-repeat: no-repeat;
+    background-position: 0 60%;
+  }
+  .line { height: 1.5px; background: var(--ink); }
+  .line.thin { height: 1px; background: rgba(26,26,26,.5); }
+  .line.dash { background:
+      linear-gradient(to right, var(--ink) 50%, transparent 50%);
+      background-size: 8px 1.5px; background-repeat: repeat-x; height: 1.5px;
+  }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px;
+    border: 1.5px solid var(--ink); border-radius: 999px; font-family:'Patrick Hand', cursive;
+    font-size: 17px; background: var(--paper); }
+  .btn.cta { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .stamp {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 6px 14px; border: 2px solid var(--accent); color: var(--accent);
+    font-family: 'Special Elite', monospace; text-transform: uppercase;
+    letter-spacing: .18em; font-size: 11px; transform: rotate(-4deg);
+    background: rgba(184,65,44,.04);
+  }
+  .tag { font-family:'Special Elite', monospace; font-size: 10px; letter-spacing: .14em;
+         text-transform: uppercase; color: var(--muted); }
+  .num-circle { width: 28px; height: 28px; border:1.5px solid var(--ink); border-radius:999px;
+                display:inline-flex; align-items:center; justify-content:center;
+                font-family:'Special Elite',monospace; font-size: 12px; }
+  .arrow::after { content: '↘'; }
+  /* grid paper background for the dossier variant */
+  .gridpaper { background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  /* annotation arrow utility */
+  .anno { position:absolute; font-family:'Caveat', cursive; color: var(--accent);
+          font-size: 22px; font-weight: 700; line-height: 1.05; transform: rotate(-3deg); }
+  .anno svg { display:block; }
+  /* hover wakeups */
+  .wf .btn { transition: transform .15s ease, box-shadow .15s ease; }
+  .wf .btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
+  .wf .btn.cta:hover { box-shadow: 3px 3px 0 var(--ink); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="variations.jsx"></script>
+<script type="text/babel" src="coastal.jsx"></script>
+<script type="text/babel" src="main.jsx"></script>
+
+<script>
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "palette": "slate",
+    "heroImage": "spa",
+    "headline": "You're done guessing what your *bathroom* will cost.",
+    "subheadline": "Get our free 2026 Bathroom Budget Blueprint — the 18-page budget analysis PDF Coastal Builders uses with our Texas homeowners before we start talking about price.",
+    "ctaCopy": "Send me the Blueprint",
+    "collageTape": true,
+    "accent": "#b8412c",
+    "paper": "#f7f3eb",
+    "showAnnotations": true
+  }/*EDITMODE-END*/;
+  window.__TWEAK_DEFAULTS = TWEAK_DEFAULTS;
+</script>
+</body>
+</html>
