@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -411,7 +411,7 @@
         /* ── REVIEWS ──────────────────────────────────────────── */
     .reviews {
       padding: 120px 56px 110px;
-      background: #DDD2BC;
+      background: #D9CFBA;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
     }
@@ -677,7 +677,7 @@
 
     /* ── ABOUT / COLLAGE ──────────────────────────────────── */
     .about {
-      background: var(--paper-alt);
+      background: #E7DFCE;
       padding: 120px 56px;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
@@ -896,7 +896,7 @@
     /* ── SERVICE AREA ─────────────────────────────────────── */
     .service-area {
       padding: 120px 56px;
-      background: #E3DAC8;
+      background: #DFD6C1;
     }
     .service-area-grid {
       display: grid;
@@ -950,7 +950,7 @@
 
     /* ── CONTACT ──────────────────────────────────────────── */
     .contact {
-      background: var(--paper-alt);
+      background: #D2C8B2;
       padding: 120px 56px;
       border-top: 1px solid var(--rule);
     }
@@ -1321,19 +1321,19 @@
         <div class="field">
           <label>
             <span class="field-lbl">Full name</span>
-            <input type="text" name="name" placeholder="Jordan Hayes" required>
+            <input type="text" name="fields[name]" placeholder="Jordan Hayes" required>
           </label>
         </div>
         <div class="field">
           <label>
             <span class="field-lbl">Email</span>
-            <input type="email" name="email" placeholder="jordan@example.com" required>
+            <input type="email" name="fields[email]" placeholder="jordan@example.com" required>
           </label>
         </div>
         <div class="field">
           <label>
-            <span class="field-lbl">Phone</span>
-            <input type="tel" name="phone" placeholder="(361) 555-0149">
+            <span class="field-lbl">Phone (optional)</span>
+            <input type="tel" name="fields[phone]" placeholder="(361) 555-0149">
           </label>
         </div>
 
@@ -1783,19 +1783,19 @@
         <div class="field">
           <label>
             <span class="field-lbl">Full name</span>
-            <input type="text" name="name" placeholder="Jordan Hayes" required>
+            <input type="text" name="fields[name]" placeholder="Jordan Hayes" required>
           </label>
         </div>
         <div class="field">
           <label>
             <span class="field-lbl">Phone</span>
-            <input type="tel" name="phone" placeholder="(361) 555-0149">
+            <input type="tel" name="fields[phone]" placeholder="(361) 555-0149">
           </label>
         </div>
         <div class="field form-full">
           <label>
             <span class="field-lbl">Email</span>
-            <input type="email" name="email" placeholder="jordan@example.com" required>
+            <input type="email" name="fields[email]" placeholder="jordan@example.com" required>
           </label>
         </div>
 
@@ -1811,7 +1811,7 @@
         <div class="form-full">
           <label>
             <span class="chips-lbl">What are you hoping for?</span>
-            <textarea class="contact-textarea" name="message" placeholder="A walk-in shower with a built-in bench, ideally finished before Thanksgiving. Open to ideas on tile."></textarea>
+            <textarea class="contact-textarea" name="fields[project_details]" placeholder="A walk-in shower with a built-in bench, ideally finished before Thanksgiving. Open to ideas on tile."></textarea>
           </label>
         </div>
 
@@ -1881,29 +1881,41 @@
   // Lead form — scroll to form on success placeholder
   function handleLeadSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
-    btn.textContent = 'Sending…';
+    const form = e.target;
+    const btn = form.querySelector('button[type=submit]');
+    const label = btn.querySelector('span');
+    if (label) { label.textContent = 'Sending…'; } else { btn.textContent = 'Sending…'; }
     btn.disabled = true;
-    // TODO: wire to your form endpoint / CRM
-    setTimeout(() => {
-      btn.innerHTML = '✓ Blueprint on its way!';
+    const MAILERLITE_URL = "https://assets.mailerlite.com/jsonp/2387200/forms/189413699739453082/subscribe";
+    function showSuccess() {
+      btn.innerHTML = '✓ Check your inbox — your Blueprint is on its way!';
       btn.style.background = '#3A6E4A';
-    }, 800);
+      form.reset();
+    }
+    fetch(MAILERLITE_URL, { method: 'POST', body: new FormData(form), mode: 'no-cors' })
+      .then(showSuccess).catch(showSuccess);
     return false;
   }
 
   // Contact form
   function handleContactSubmit(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('button[type=submit]');
+    const form = e.target;
+    const btn = form.querySelector('button[type=submit]');
     const span = btn.querySelector('span:first-child');
-    span.textContent = 'Sending…';
+    if (span) { span.textContent = 'Sending…'; } else { btn.textContent = 'Sending…'; }
     btn.disabled = true;
-    // TODO: wire to your form endpoint
-    setTimeout(() => {
-      span.textContent = '✓ Request received — we\'ll be in touch!';
+    const MAILERLITE_URL = "https://assets.mailerlite.com/jsonp/2387200/forms/189775754089727415/subscribe";
+    const fd = new FormData(form);
+    const activeChip = form.querySelector('#chips .chip.active');
+    if (activeChip) { fd.append('fields[project_type]', activeChip.dataset.chip); }
+    function showSuccess() {
+      btn.innerHTML = '✓ Request received — we\'ll be in touch within one business day!';
       btn.style.background = '#3A6E4A';
-    }, 800);
+      form.reset();
+    }
+    fetch(MAILERLITE_URL, { method: 'POST', body: fd, mode: 'no-cors' })
+      .then(showSuccess).catch(showSuccess);
     return false;
   }
 </script>
