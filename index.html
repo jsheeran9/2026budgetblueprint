@@ -18,13 +18,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --paper:     #EFEAE0;
-      --paper-alt: #E6E0D2;
-      --ink:       #1B1F23;
-      --ink-alt:   #272B30;
-      --accent:    #A37A3D;
-      --muted:     #6F6A60;
-      --rule:      rgba(27,31,35,.14);
+      --paper:     #f4f3f0;
+      --paper-alt: #e9e6de;
+      --ink:       #111a0d;
+      --ink-alt:   #1b2613;
+      --accent:    #e8fd53;
+      --accent-hover: #d4eb4a;
+      --muted:     #5e5a53;
+      --rule:      rgba(17,26,13,.14);
       --serif: 'Aspekta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
       --sans:  'Aspekta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
       --mono:  'Aspekta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -186,7 +187,7 @@
       width: 18px; height: 18px;
       border-radius: 999px;
       background: var(--accent);
-      color: #fff;
+      color: var(--ink);
       display: inline-grid;
       place-items: center;
       font-size: 10px;
@@ -230,7 +231,7 @@
       position: absolute;
       top: -14px; left: 24px;
       background: var(--accent);
-      color: #fff;
+      color: var(--ink);
       font-family: var(--mono);
       font-size: 10.5px;
       letter-spacing: .18em;
@@ -292,8 +293,8 @@
       margin-top: 8px;
       padding: 17px 22px;
       border-radius: 10px;
-      background: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      color: var(--ink);
       border: none;
       cursor: pointer;
       font-family: var(--sans);
@@ -306,7 +307,7 @@
       width: 100%;
       transition: opacity .15s;
     }
-    .lead-btn:hover { opacity: .88; }
+    .lead-btn:hover { background: var(--accent-hover); }
     .lead-btn-arrow {
       font-family: var(--serif);
       font-style: normal;
@@ -419,7 +420,7 @@
         /* ── REVIEWS ──────────────────────────────────────────── */
     .reviews {
       padding: 120px 56px 110px;
-      background: #D9CFBA;
+      background: #d8d3c7;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
     }
@@ -685,7 +686,7 @@
 
     /* ── ABOUT / COLLAGE ──────────────────────────────────── */
     .about {
-      background: #E7DFCE;
+      background: #ece8df;
       padding: 120px 56px;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
@@ -904,7 +905,7 @@
     /* ── SERVICE AREA ─────────────────────────────────────── */
     .service-area {
       padding: 120px 56px;
-      background: #DFD6C1;
+      background: #d8d3c7;
     }
     .service-area-grid {
       display: grid;
@@ -958,7 +959,7 @@
 
     /* ── CONTACT ──────────────────────────────────────────── */
     .contact {
-      background: #D2C8B2;
+      background: #cfc9be;
       padding: 120px 56px;
       border-top: 1px solid var(--rule);
     }
@@ -1063,7 +1064,7 @@
     .chip.active {
       border-color: var(--accent);
       background: var(--accent);
-      color: #fff;
+      color: var(--ink);
     }
     .contact-textarea {
       width: 100%;
@@ -1086,8 +1087,8 @@
       margin-top: 6px;
       padding: 18px 22px;
       border-radius: 10px;
-      background: var(--ink);
-      color: var(--paper);
+      background: var(--accent);
+      color: var(--ink);
       border: none;
       cursor: pointer;
       font-family: var(--sans);
@@ -1100,7 +1101,7 @@
       width: 100%;
       transition: opacity .15s;
     }
-    .form-btn:hover { opacity: .88; }
+    .form-btn:hover { background: var(--accent-hover); }
     .form-btn-arrow {
       font-family: var(--serif);
       font-style: normal;
@@ -1231,6 +1232,19 @@
       footer { padding: 48px 20px 28px; }
       .service-area-h2, .contact-h2, .about-h2 { font-size: 36px; }
     }
+
+    /* ===== Earth-tone + lime brand theme (matches coastalbuildersassociates.com) ===== */
+    .lead-h2 em, .section-h2 em, .about-h2 em, .service-area-h2 em,
+    .contact-h2 em, .contact-form-h3 em {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: .1em;
+      text-underline-offset: .08em;
+    }
+    .eyebrow-text, .review-photo-caption, .feature-num, .service-eyebrow,
+    .google-pill-arrow, .pill-cta-arrow, .city-arrow,
+    .lead-btn-arrow, .form-btn-arrow { color: var(--ink); }
   </style>
 </head>
 <body>
@@ -1344,8 +1358,8 @@
 
         <div class="lead-privacy">
           <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-            <path d="M6 1 L 1 4 L 1 6.5 Q 1 9.5 6 11 Q 11 9.5 11 6.5 L 11 4 Z" stroke="#6F6A60" stroke-width="1" fill="none"/>
-            <path d="M4 6 L 5.5 7.5 L 8 5" stroke="#A37A3D" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            <path d="M6 1 L 1 4 L 1 6.5 Q 1 9.5 6 11 Q 11 9.5 11 6.5 L 11 4 Z" stroke="#5e5a53" stroke-width="1" fill="none"/>
+            <path d="M4 6 L 5.5 7.5 L 8 5" stroke="#111a0d" stroke-width="1.4" fill="none" stroke-linecap="round"/>
           </svg>
           <span class="lead-privacy-text">We never sell your info.</span>
         </div>
